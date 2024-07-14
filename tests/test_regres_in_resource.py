@@ -3,7 +3,10 @@ from jsonschema import validate
 import json
 
 
-def test_get_single_resource(base_url, endpoint_resource):
+endpoint_resource = '/unknown/'
+
+
+def test_get_single_resource(base_url):
     id_user = 4
     response = requests.get(base_url + endpoint_resource + str(id_user))
 
@@ -14,7 +17,7 @@ def test_get_single_resource(base_url, endpoint_resource):
     validate(response.json(), schema)
 
 
-def test_get_single_resource_not_found(base_url, endpoint_resource):
+def test_get_single_resource_not_found(base_url):
     id_user = 45
     response = requests.get(base_url + endpoint_resource + str(id_user))
 

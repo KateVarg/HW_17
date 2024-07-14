@@ -3,7 +3,10 @@ from jsonschema import validate
 from schemas.user import get_user, post_user, put_user
 
 
-def test_get_single_user(base_url, endpoint_user):
+endpoint_user = '/users/'
+
+
+def test_get_single_user(base_url):
     id_user = 4
     response = requests.get(base_url + endpoint_user + str(id_user))
 
@@ -12,7 +15,7 @@ def test_get_single_user(base_url, endpoint_user):
     validate(response.json(), get_user)
 
 
-def test_post_create_user(base_url, endpoint_user):
+def test_post_create_user(base_url):
     payload = {
         "name": "Jhon",
         "job": "team-leader"
@@ -25,7 +28,7 @@ def test_post_create_user(base_url, endpoint_user):
     validate(response.json(), post_user)
 
 
-def test_put_user(base_url, endpoint_user):
+def test_put_user(base_url):
     id_user = 4
     payload = {
         "name": "Mark",
@@ -39,7 +42,7 @@ def test_put_user(base_url, endpoint_user):
     validate(response.json(), put_user)
 
 
-def test_delete_user(base_url, endpoint_user):
+def test_delete_user(base_url):
     id_user = 4
     response = requests.delete(base_url + endpoint_user + str(id_user))
 

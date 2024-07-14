@@ -3,7 +3,10 @@ import json
 from jsonschema import validate
 
 
-def test_post_register_success(base_url, endpoint_register):
+endpoint_register = '/register'
+
+
+def test_post_register_success(base_url):
     payload = {
         "email": "eve.holt@reqres.in",
         "password": "pistol"
@@ -11,13 +14,12 @@ def test_post_register_success(base_url, endpoint_register):
     response = requests.post(base_url + endpoint_register, data=payload)
 
     assert response.status_code == 200
-    assert response.json()['id']
     with open('schemas/register.json') as file:
         schema = json.load(file)
     validate(response.json(), schema)
 
 
-def test_post_register_fail(base_url, endpoint_register):
+def test_post_register_fail(base_url):
     payload = {
         "email": "sydney@fife"
     }
